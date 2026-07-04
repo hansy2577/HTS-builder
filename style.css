@@ -1,5 +1,6 @@
 body {
     font-size: 15pt;
     background-color: #BABEEA;
-    
+    background-image: url("images/BG.png");
+    background-size: 15px;
 }

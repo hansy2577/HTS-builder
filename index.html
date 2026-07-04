@@ -16,16 +16,26 @@
 
 <body>
   
+<!--  -->
+  
 <div id="top bars" style="background-Color: #4E526E; left: -1px; top: -5px; border-radius: 4px; width: 950px; height: 90px; position: absolute;" ></div>
 
-<label style="position: absolute; scale: 0.4; z-index: 1; top: 0px; left: 185px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;" for="import project">↓ import project</label>
+<label style="position: absolute; scale: 0.4; z-index: 1; top: 24px; left: -45px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;" for="import project">↓ import project</label>
+
+<label onclick="resetEditorCanvas()" style="position: absolute; scale: 0.4; z-index: 1; top: 0px; left: -35.5px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;">°new project</label>
 <input multiple type="file" accept=".HTP" id="import project" style="display: none;">
 
-<label style="position: absolute; scale: 0.4; z-index: 1; top: 25px; left: 185px; background-color: #54566B; color: white; padding: 4px; border: 1px solid black;" for="import images">↓ import images</label>
+<label onclick="saveData()" style="position: absolute; scale: 0.4; z-index: 1; top: 50px; left: -29px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;">↑ exported</label>
+
+<!-- defaut button -->
+
+<label style="position: absolute; scale: 0.4; z-index: 1; top: 24px; left: 225px; background-color: #54566B; color: white; padding: 4px; border: 1px solid black;" for="import images">↓ import image</label>
 <input multiple type="file" id="import images" style="display: none;">
 
-<label onclick="saveData()" style="position: absolute; scale: 0.4; z-index: 1; top: 50px; left: 200px; background-color: #54566B; color: white; padding: 4px; border: 1px solid black;">↑ exported</label>
+<a style="position: absolute; color: white; width: 100px; left: 243px; top: 8px; z-index:1; scale: 0.43;">name :</a>
+<input id="projectName" value="untitle lily proj" type="text" style="position: absolute; top: 9px; left: 273px; width: 160px; scale: 0.65">
 
+<!-- engine canvas -->
 
 <div id="canvas" style="position: absolute; z-index: -5;">
   
@@ -48,6 +58,9 @@
   <input style="position: absolute; z-index: 2; background-color: white; left: 0px; width: 70px; top: 190px; scale: 0.6;" type="number" name="" id="§z">
   <input style="position: absolute; z-index: 2; background-color: white; left: 105px; width: 40px; top: 190px; scale: 0.6;" type="number" name="" id="§scale">
 
+  <a style="position: absolute; color: white; width: 70px; left: -15px; top: 219px; z-index:1; scale: 0.55;">type :</a>
+  <input style="position: absolute; z-index: 2; background-color: white; left: 12px; width: 90px; top: 220px; scale: 0.6;" type="text" name="" id="§type">
+
 </div>
 
 <div id="move" style="position: absolute; background-color: white;">
@@ -55,8 +68,7 @@
   <input style="position: absolute; z-index: 2; background-color: white; left: 300px;" type="range" max="500" min="-500" name="" id="">
 </div>
   <!-- Project -->
-  
-<script src="module/HPS-engine.js"></script>
+<script src="module/HPS engine.js"></script>
 <script src="initiating.js"></script>
 <script src="main.js"></script>
 </body>
