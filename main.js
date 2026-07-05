@@ -266,16 +266,28 @@ function play() {
 var intervalG = 0;
 setInterval(() => {
   if (engine.playTest && document.getElementById("traction-range").value !== "0") {
-    if (speed >= Number.parseInt(document.getElementById("traction-range").value) + 0.002) {
+    if (document.getElementById("traction-range").value >= 0) {
+      if (document.getElementById("traction-range").value == 1) {
+        engine.speed += 0.001;
+      }
+      if (document.getElementById("traction-range").value == 2) {
+        engine.speed += 0.002;
+      }
       // brack
-      engine.speed -= 0.002;
-    } else if (speed <= Number.parseInt(document.getElementById("traction-range").value) + 0.002) {
+    } else if (document.getElementById("traction-range").value <= 0) {
       // traction
-      engine.speed += 0.009;
+      if (document.getElementById("traction-range").value == -1) {
+        engine.speed -= 0.003;
+      }
+      
+      if (document.getElementById("traction-range").value == -2) {
+        engine.speed -= 0.007;
+      }
     }
     intervalG += engine.speed
+    //console.log(document.getElementById("traction-range").value)
     
-    if (intervalG >= 1000) {
+    if (intervalG >= 100) {
       intervalG = 0;
       moevDetector()
     }
@@ -286,6 +298,7 @@ setInterval(() => {
   if (!engine.playTest) {
     engine.speed = 0;
   }
+  
   if (document.getElementById("speed").innerText !== document.getElementById("traction-range").value) {
     document.getElementById("speed").innerText = document.getElementById("traction-range").value
   }
@@ -298,7 +311,7 @@ function element_playAnim(id,type) {
     const loop = setInterval(() => {
       angle += engine.speed * 0.5
       document.getElementById(id).style.transform = "rotate("+angle+"deg)";
-    
+      
       if (!engine.playTest) {
         clearInterval(loop)
         document.getElementById(id).style.transform = "";
