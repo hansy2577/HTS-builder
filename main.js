@@ -12,6 +12,7 @@ let engine = {
   element: {},
   
   playTest: false,
+  speed: 0,
   
   setintervalAll: [],
   sound: { ambiance: new Audio("ambiance.ogg") }
@@ -25,6 +26,11 @@ document.onclick = function () {
   }
 }
 
+function click() {
+  new Audio("click.ogg").play()
+}
+
+
 document.getElementById("import images").addEventListener('change', function(event) {
   const file = event.target.files[0];
             
@@ -37,8 +43,8 @@ document.getElementById("import images").addEventListener('change', function(eve
       
       euh.id = file.name;
       euh.style.position = 'absolute';
-      euh.style.top = '100px'
-      euh.style.left = '100px'
+      euh.style.top = '150px'
+      euh.style.left = '300px'
       euh.src = e.target.result;
       euh.classList.add("wheel")
       
@@ -74,7 +80,7 @@ document.getElementById("import project").addEventListener('change', function(ev
     var dataFile = JSON.parse(e.target.result);
     console.log(dataFile);
     engine.elementMakeCount = 0;
-    document.getElementById("projectName").value = file.name;
+    document.getElementById("projectName").value = dataFile["project name"];
     
     if (document.getElementById('canvas').lastElementChild) {
       document.getElementById('canvas').lastElementChild.remove()
@@ -153,6 +159,8 @@ setInterval(() => {
 },0)
 
 function select(name) {
+  // HPS_get like doc.get, sometime i use this when i to lazy idk
+  
   if (name == engine.select) {
     HPS_get("§x").value = "";
     HPS_get("§y").value = "";
@@ -238,20 +246,8 @@ function play() {
       child = document.getElementsByName(i+":P")[0];
     
       if (i !== engine.elementMakeCount) {
-        child.classList
-        if (child.classList == "wheel") {
-          
-          var angle = 0;
-          var loop = setInterval(() => {
-            angle += 0.5
-            child.style.transform = "rotate("+angle+"deg)"
-            if (!engine.playTest) {
-              clearInterval(loop)
-              child.style.transform = "";
-            }
-          },0)
-          console.log(engine)
-        }
+        var theChild = child;
+        element_playAnim(theChild.id,child.classList)
       } 
   }
 
@@ -264,5 +260,61 @@ function play() {
     engine.playTest = false;
     document.getElementById("play/stop").src = "images/play.png";
     document.getElementById("tabMeta").style.visibility = "visible";
+  }
+}
+
+var intervalG = 0;
+setInterval(() => {
+  if (engine.playTest && document.getElementById("traction-range").value !== "0") {
+    if (speed >= Number.parseInt(document.getElementById("traction-range").value) + 0.002) {
+      // brack
+      engine.speed -= 0.002;
+    } else if (speed <= Number.parseInt(document.getElementById("traction-range").value) + 0.002) {
+      // traction
+      engine.speed += 0.009;
+    }
+    intervalG += engine.speed
+    
+    if (intervalG >= 1000) {
+      intervalG = 0;
+      moevDetector()
+    }
+    
+    // jk everything is inversed idk XD
+  }
+  
+  if (!engine.playTest) {
+    engine.speed = 0;
+  }
+  if (document.getElementById("speed").innerText !== document.getElementById("traction-range").value) {
+    document.getElementById("speed").innerText = document.getElementById("traction-range").value
+  }
+},0)
+
+function element_playAnim(id,type) {
+  if (type == "wheel") {
+    var angle = 0;
+    document.getElementById(id).style.opacity = "1";
+    const loop = setInterval(() => {
+      angle += engine.speed * 0.5
+      document.getElementById(id).style.transform = "rotate("+angle+"deg)";
+    
+      if (!engine.playTest) {
+        clearInterval(loop)
+        document.getElementById(id).style.transform = "";
+      }
+    },0)
+  }
+  
+  // put your custom element function here !
+}
+
+function moevDetector() {
+  var d = HPS_makeElement("l",window.innerWidth - 13,50,1,5,200,"sub-canvas")
+  d.style.cssText += "background-color: white; opacity: 0.3;"
+  d.id = Math.random()
+  
+  HPS_makeCSSanim(d.id,2,"linear",1,[{ left: "-100px" }]).onfinish = function () {
+    d.remove()
   }
 }

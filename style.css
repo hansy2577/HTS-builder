@@ -4,3 +4,10 @@ body {
     background-image: url("images/BG.png");
     background-size: 15px;
 }
+
+#traction-range {
+  -webkit-appearance: none; /* Chrome, Safari, Edge */
+  appearance: none;
+  width: 300px;
+  background: transparent; /* Remove default background */
+}

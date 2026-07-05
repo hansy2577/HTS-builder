@@ -22,10 +22,10 @@
 
 <label style="position: absolute; scale: 0.4; z-index: 1; top: 24px; left: -45px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;" for="import project">↓ import project</label>
 
-<label onclick="resetEditorCanvas()" style="position: absolute; scale: 0.4; z-index: 1; top: 0px; left: -35.5px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;">°new project</label>
-<input multiple type="file" accept=".HTP" id="import project" style="display: none;">
+<label onclick="resetEditorCanvas(); click()" style="position: absolute; scale: 0.4; z-index: 1; top: 0px; left: -35.5px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;">°new project</label>
+<input onclick="click()" multiple type="file" accept=".HTP" id="import project" style="display: none;">
 
-<label onclick="saveData()" style="position: absolute; scale: 0.4; z-index: 1; top: 50px; left: -29px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;">↑ exported</label>
+<label onclick="saveData(); click()" style="position: absolute; scale: 0.4; z-index: 1; top: 50px; left: -29px; background-color: #54566B; color: white; padding: 4px; border: 1px solid white;">↑ exported</label>
 
 <!-- defaut button -->
 
@@ -37,12 +37,18 @@
 
 <!-- engine canvas -->
 
+<div id="sub-canvas" style="position: absolute; z-index: -5;">
+  
+</div>
+
+
 <div id="canvas" style="position: absolute; z-index: -5;">
   
 </div>
 
 <div id="tabMeta" style="position: absolute;">
-  <div style="background-Color: #4E526E; left: -50px; top: 150px; border-radius: 4px; width: 200px; height: 300px; position: absolute;"></div>
+  <div style="background-Color: #4E526E; opacity: 0.7; left: -50px; top: 150px; border-radius: 4px; width: 200px; height: 300px; position: absolute;"></div>
+  
   <input style="position: absolute; z-index: 2; background-color: white; left: 0px; width: 170px; top: 146px; scale: 0.6;" type="text" id="§inputName">
   
   <a style="position: absolute; color: white; width: 50px; left: -10px; top: 169px; z-index:1; scale: 0.55;">X :</a>
@@ -60,14 +66,27 @@
 
   <a style="position: absolute; color: white; width: 70px; left: -15px; top: 219px; z-index:1; scale: 0.55;">type :</a>
   <input style="position: absolute; z-index: 2; background-color: white; left: 12px; width: 90px; top: 220px; scale: 0.6;" type="text" name="" id="§type">
-
 </div>
+
+<!-- playTest -->
+
+<div id="playTest" style="position: absolute;">
+	<div style="background-Color: #4E526E; opacity: 0.7; left: -50px; top: 185px; border-radius: 4px; width: 150px; height: 300px; position: absolute;"></div>
+
+	<a id="" style="position: absolute; color: white; width: 110px; left: -30px; top: 180px; z-index:1; scale: 0.65;">manipulateur de tration :</a>
+
+	<input style=" position: absolute; z-index: 2; scale:1.2; top: 330px; width: 170px; height: 15px; background-color: white; color: white; left: -90px; transform: rotate(-90deg);" type="range" max="2" min="-2" id="traction-range">
+	
+	<a id="speed" style="position: absolute; color: white; width: 100px; left: 15px; top: 325px; z-index:1; scale: 0.7;">- 00km/s</a>
+</div>
+
 <div id="move" style="position: absolute; background-color: white;">
-  <input style="position: absolute; z-index: 2; background-color: white; left: 150px;" type="range" max="500" min="-500" name="" id="">
-  <input style="position: absolute; z-index: 2; background-color: white; left: 300px;" type="range" max="500" min="-500" name="" id="">
+	<a id="speed" style="position: absolute; color: white; width: 500px; left: -150px; top: 0px; z-index:1; scale: 0.4;">v 1.2 | made by @hansy2577b and H-project's</a>
+
+  <input style="position: absolute; z-index: 2; background-color: white; left: 150px;" type="range" max="500" min="-500" name="" class="in" id="">
 </div>
   <!-- Project -->
-<script src="module/HPS-engine.js"></script>
+<script src="module/HPS engine.js"></script>
 <script src="initiating.js"></script>
 <script src="main.js"></script>
 </body>
